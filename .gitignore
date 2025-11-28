@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Linting/formatting caches
+.ruff_cache/
+.mypy_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Exclude from public repo
+docs-official/
+scrape_rich_docs.py
+fetch_rich_docs.py
+verify_docs.py
+fix_code_blocks.py
+update_frontmatter.py
+clean_docs.py
+SCRAPE_REPORT.md
+
+# UV lock (generated)
+uv.lock
+
