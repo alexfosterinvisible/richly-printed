@@ -25,6 +25,7 @@ scripts=(
     layout_judge.py
     agent_dashboard.py
     trace_rich.py
+    transient_summary.py
 )
 echo "[OK] Will run ${#scripts[@]} demos in numbered order:"
 for i in "${!scripts[@]}"; do

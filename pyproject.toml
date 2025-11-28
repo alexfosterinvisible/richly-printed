@@ -1,12 +1,23 @@
+# richly-printed - Rich library demos for terminal UIs
+# 
+# WHY THIS EXISTS:
+# Copy-paste examples for coding agents. Ranges from basic static panels
+# to advanced dynamic dashboards with transient/self-compacting output.
+# Avoids Streamlit/React/Vite bloat when you just need terminal feedback.
+
 [project]
 name = "richly-printed"
 version = "0.1.0"
-description = "20 demos of using the Rich library for basic, dynamic and live terminal prints. Intended for quick reference for coding agents when you want more flexibility from the terminal but don't want to turn on bloat from Streamlit/React/Vite etc. Includes basic clones of the Docker compose and Astral uv sync TUIs."
+description = "19 Rich library demos: from basic copy-paste panels to dynamic dashboards with live updates, progress bars, and transient self-compacting output. Agent-friendly reference for terminal UIs without web framework bloat."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Alex Foster" }]
+
+# Python 3.10+ for modern type hints and asyncio features
 requires-python = ">=3.10"
-keywords = ["rich", "terminal", "tui", "cli", "progress", "live", "dashboard"]
+
+keywords = ["rich", "terminal", "tui", "cli", "progress", "live", "dashboard", "transient"]
+
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Console",
@@ -21,68 +32,69 @@ classifiers = [
 ]
 
 dependencies = [
+    # Core: Rich for all terminal formatting
     "rich>=13.0.0",
+    
+    # Logging: Loguru for structured logs (used in basic demo)
     "loguru>=0.7.0",
-    "httpx>=0.27.0",
-    "aiohttp>=3.9.0",
+    
+    # HTTP: For async/sync HTTP demos (httpbin.org examples)
+    "httpx>=0.27.0",    # sync + async client
+    "aiohttp>=3.9.0",   # pure async (used in some demos)
 ]
 
 [project.urls]
 Homepage = "https://github.com/alexfosterinvisible/richly-printed"
 Repository = "https://github.com/alexfosterinvisible/richly-printed"
 
+# Entry points: `uv run <name>` or `python -m <name>`
+# Organized by complexity: basic → dynamic → advanced
 [project.scripts]
-# Example 1: Basic Rich Console Demo
-basic = "rich_basic:main"
-# Example 2: Markdown & Syntax Highlighting
-markdown = "markdown_syntax:main"
-# Example 3: PEP 723 Inline Metadata
-inline = "inline_pep723:main"
-# Example 4: Environment Variables
-example-env = "env:main"
-# Example 5: Async HTTP
-async-http = "async_http:main"
-# Example 6: Layout Panes
-layout = "layout_panes:main"
-# Example 7: LLM Judge Layout
-layout-judge = "layout_judge:main"
-# Example 8: Live Tasks
-live-tasks = "live_tasks:main"
-# Example 9A: Live Logs
-live-logs = "live_logs:main"
-# Example 9B: Live Logs Ordered
-live-logs-ordered = "live_logs_ordered:main"
-# Example 10: Live Dashboard
-live-dashboard = "live_dashboard:main"
-# Example 11: Live Metrics
-live-metrics = "live_metrics:main"
-# Example 12: Advanced Progress Bar
-progress-advanced = "prog_bar_advanced:main"
-# Example 13: Loader Tasks (uv sync style)
-loader-tasks = "loader_tasks:main"
-# Example 14: Streaming Loader Tasks
-loader-tasks-stream = "loader_tasks_stream:main"
-# Example 15: Rich Tracebacks
-tracebacks = "trace_rich:main"
-# Example 16: HTTP with Dependencies
-deps = "deps_httpx:main"
-# Example 17: Live Coding Agents Dashboard
-coding-agents = "live_dashboard_coding_agents:main"
-# Example 18: Agent Dashboard
-agent-dashboard = "agent_dashboard:main"
+
+# --- BASIC: Static output, copy-paste friendly ---
+basic = "rich_basic:main"                    # 1. Panel + console.print
+markdown = "markdown_syntax:main"            # 2. Markdown + syntax highlighting
+inline = "inline_pep723:main"                # 3. PEP 723 inline deps demo
+example-env = "env:main"                     # 4. Environment variables table
+deps = "deps_httpx:main"                     # 16. HTTP request + table
+
+# --- DYNAMIC: Live updates, progress bars ---
+async-http = "async_http:main"               # 5. Async HTTP with spinners
+layout = "layout_panes:main"                 # 6. Split-screen regions
+layout-judge = "layout_judge:main"           # 7. Multi-panel LLM judge
+live-tasks = "live_tasks:main"               # 8. Multi-stage task spinners
+live-logs = "live_logs:main"                 # 9A. Streaming log aggregation
+live-logs-ordered = "live_logs_ordered:main" # 9B. Out-of-order → sequential
+live-dashboard = "live_dashboard:main"       # 10. Two-column job queue
+live-metrics = "live_metrics:main"           # 11. RPS/errors/latency panels
+progress-advanced = "prog_bar_advanced:main" # 12. ETA + transfer speed
+
+# --- ADVANCED: Production-style dashboards ---
+loader-tasks = "loader_tasks:main"           # 13. uv sync style (multi-stage)
+loader-tasks-stream = "loader_tasks_stream:main"  # 14. Irregular spawn + auto-remove
+tracebacks = "trace_rich:main"               # 15. Rich tracebacks with locals
+coding-agents = "live_dashboard_coding_agents:main"  # 17. Pipeline simulation
+agent-dashboard = "agent_dashboard:main"     # 18. Full monitoring dashboard
+
+# --- TRANSIENT: Self-compacting output ---
+transient-summary = "transient_summary:main" # 19. Live panel → summary replacement
 
 [build-system]
+# Hatchling: Modern, fast build backend
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
+# Include all .py files in root (flat structure, no src/ subdir)
 packages = ["."]
 
 [tool.ruff]
+# Line length: 120 for readability in terminal demos
 line-length = 120
 target-version = "py310"
 
 [tool.ruff.lint]
+# Basic checks: errors, formatting, imports, warnings
 select = ["E", "F", "I", "W"]
+# E501: Line too long - demos sometimes have long strings for readability
 ignore = ["E501"]
-

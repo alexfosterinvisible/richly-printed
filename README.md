@@ -1,8 +1,17 @@
 # richly-printed
 
-**20 demos of using the Rich library for basic, dynamic and live terminal prints.**
+**19 Rich library demos: from basic copy-paste panels to dynamic dashboards with transient self-compacting output.**
 
 Intended for quick reference for coding agents when you want more flexibility from the terminal but don't want to turn on bloat from Streamlit/React/Vite etc. Includes basic clones of the Docker compose and Astral uv sync TUIs.
+
+## Complexity Levels
+
+| Level | What | Examples |
+|-------|------|----------|
+| **Basic** | Static output, copy-paste | Panels, tables, syntax highlighting |
+| **Dynamic** | Live updates, progress | Spinners, progress bars, layouts |
+| **Advanced** | Production dashboards | Multi-panel monitoring, resource tracking |
+| **Transient** | Self-compacting output | Live verbose → summary replacement |
 
 ## Installation
 
@@ -22,9 +31,10 @@ pip install -e .
 
 ```bash
 # Run any demo via entry point
-uv run basic
-uv run live-dashboard
-uv run agent-dashboard
+uv run basic              # Simple panel
+uv run live-dashboard     # Dynamic job queue
+uv run agent-dashboard    # Full monitoring
+uv run transient-summary  # Self-compacting output
 
 # Or run all demos in sequence
 ./run_all_rich_demos.sh
@@ -32,29 +42,55 @@ uv run agent-dashboard
 
 ## Demos
 
+### Basic (Static Output)
+
 | # | Command | Description |
 |---|---------|-------------|
-| 1 | `basic` | Basic Rich Console - Panel rendering, color markup, loguru integration |
-| 2 | `markdown` | Markdown & Syntax - Render markdown and syntax-highlighted code |
-| 3 | `inline` | PEP 723 Inline Metadata - Self-contained scripts with embedded deps |
-| 4 | `example-env` | Environment Variables - Config display with defaults |
-| 5 | `async-http` | Async HTTP - Async requests with progress spinners |
-| 6 | `layout` | Layout Panes - Split-screen terminal regions with live updates |
-| 7 | `layout-judge` | LLM Judge Layout - Parallel evaluation with color-coded I/O |
-| 8 | `live-tasks` | Live Tasks - Multi-stage progression with spinners |
-| 9A | `live-logs` | Live Logs - Streaming log aggregation with rotation |
-| 9B | `live-logs-ordered` | Live Logs Ordered - Out-of-order completion with sequential display |
-| 10 | `live-dashboard` | Live Dashboard - Multi-column job queue monitoring |
-| 11 | `live-metrics` | Live Metrics - Real-time RPS/errors/latency panels |
-| 12 | `progress-advanced` | Advanced Progress - Custom columns with ETA and transfer speed |
-| 13 | `loader-tasks` | Loader Tasks - Package manager style multi-stage processing |
-| 14 | `loader-tasks-stream` | Streaming Loader - UV sync style irregular spawn with auto-cleanup |
-| 15 | `tracebacks` | Rich Tracebacks - Enhanced error display with local variables |
-| 16 | `deps` | HTTP Dependencies - External library integration with tables |
-| 17 | `coding-agents` | Coding Agents Dashboard - Pipeline simulation with loop-back workflow |
-| 18 | `agent-dashboard` | Agent Dashboard - Production-grade multi-panel monitoring |
+| 1 | `basic` | Panel rendering, color markup, loguru integration |
+| 2 | `markdown` | Render markdown and syntax-highlighted code |
+| 3 | `inline` | PEP 723 self-contained scripts with embedded deps |
+| 4 | `example-env` | Environment variables table with defaults |
+| 16 | `deps` | HTTP request with response table |
+
+### Dynamic (Live Updates)
+
+| # | Command | Description |
+|---|---------|-------------|
+| 5 | `async-http` | Async requests with progress spinners |
+| 6 | `layout` | Split-screen terminal regions |
+| 7 | `layout-judge` | Multi-panel LLM evaluation workflow |
+| 8 | `live-tasks` | Multi-stage task progression with spinners |
+| 9A | `live-logs` | Streaming log aggregation with rotation |
+| 9B | `live-logs-ordered` | Out-of-order completion → sequential display |
+| 10 | `live-dashboard` | Two-column job queue monitoring |
+| 11 | `live-metrics` | Real-time RPS/errors/latency panels |
+| 12 | `progress-advanced` | Custom columns with ETA and transfer speed |
+
+### Advanced (Production Dashboards)
+
+| # | Command | Description |
+|---|---------|-------------|
+| 13 | `loader-tasks` | uv sync style multi-stage processing |
+| 14 | `loader-tasks-stream` | Irregular spawn with auto-removal |
+| 15 | `tracebacks` | Rich tracebacks with local variable inspection |
+| 17 | `coding-agents` | Pipeline simulation with loop-back workflow |
+| 18 | `agent-dashboard` | Full monitoring: CPU, RAM, events, traces |
+
+### Transient (Self-Compacting)
+
+| # | Command | Description |
+|---|---------|-------------|
+| 19 | `transient-summary` | Live verbose logs → summary replacement |
 
 ## Highlights
+
+### Transient Self-Compacting Output (`transient-summary`)
+Shows verbose progress during execution, then replaces with concise summary:
+- Live panel with "Analyzing..." placeholders
+- Async slot reservation maintains visual order
+- Panel vanishes when done (`transient=True`)
+- Final summary prints in its place
+- Perfect for agent workflows, CI/CD output
 
 ### UV Sync Clone (`loader-tasks-stream`)
 Mimics the Astral UV package manager TUI with:
@@ -96,4 +132,3 @@ The `docs/` folder contains curated Rich library documentation covering:
 ## License
 
 MIT
-
